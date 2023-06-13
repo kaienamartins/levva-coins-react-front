@@ -357,7 +357,7 @@
       "responses": [
         {
           "uuid": "1b920868-f8e1-4331-8f8b-6dfe820a2567",
-          "body": "[\n  {{#repeat 5 10}}\n{\n  \"description\": \"{{faker 'commerce.productName'}}\",\n  \"amount\": {{ toFixed (float 10.00 100.00) 2}},\n  \"type\": {{int 0 1}},\n  \"category\": {\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{faker 'commerce.department'}}\"\n              },\n    \"createdAt\": \"{{now 'dd/MM/YYYY'}}\"\n}\n{{/repeat}}\n]",
+          "body": "[\n  {{#repeat 5 10}}\n{\n  \"description\": \"{{faker 'commerce.productName'}}\",\n  \"amount\": {{ toFixed (float 10.00 100.00) 2}},\n  \"type\": {{int 0 1}},\n  \"category\": {\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{faker 'commerce.department'}}\"\n              },\n  \"createdAt\": \"{{now 'dd/MM/YYYY'}}\"\n}\n{{/repeat}}\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "List all transactions",
@@ -509,7 +509,7 @@
       "responses": [
         {
           "uuid": "ec412592-391d-4c99-a965-cd5854898dac",
-          "body": "[\n  {{#repeat 5 10}}\n  {\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{faker 'commerce.department'}}\",\n  }\n  {{/repeat}}  \n]",
+          "body": "[\r\n  {{#repeat 5 10}}\r\n  {\r\n    \"id\": \"{{guid}}\",\r\n    \"description\": \"{{faker 'commerce.department'}}\"\r\n  }\r\n  {{/repeat}}  \r\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",

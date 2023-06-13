@@ -95,21 +95,19 @@ export function TransactionModal() {
         />
         {errors.amount && <FormError>{errors.amount.message}</FormError>}
 
-        <FormSelect {...register("categoryId")}>
-          <option value="" selected disabled hidden>
+        <FormSelect {...register("categoryId")} defaultValue="">
+          <option value="" disabled hidden>
             Categoria
           </option>
 
-          {Array.isArray(categories) && (
-            <>
-              {categories.map((category: any) => (
-                <option key={category.id} value={category.id}>
-                  {category.description}
-                </option>
-              ))}
-            </>
-          )}
+          {Array.isArray(categories) &&
+            categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.description}
+              </option>
+            ))}
         </FormSelect>
+
         {errors.categoryId && <FormError>{errors.categoryId.message}</FormError>}
 
         <TransactionTypeContainer

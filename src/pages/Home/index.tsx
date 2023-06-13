@@ -57,12 +57,9 @@ export function Home() {
         <TransactionsTable>
           <thead>
             <tr>
-              <td>Descricão</td>
-
-              <td>Preco</td>
-
+              <td>Descrição</td>
+              <td>Preço</td>
               <td>Categoria</td>
-
               <td>Data</td>
             </tr>
           </thead>
@@ -73,7 +70,7 @@ export function Home() {
                 <td width="50%">{transaction.description}</td>
 
                 <td>
-                  <PriceHighlight variant="income">
+                  <PriceHighlight variant={transaction.type === 0 ? "income" : "outcome"}>
                     {money.format(transaction.amount)}
                   </PriceHighlight>
                 </td>
