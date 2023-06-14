@@ -7,23 +7,25 @@ import {
 } from "../../stores/CategoryStore/CategoryEvents";
 
 import { NewCategoryParams } from "../../domains/category";
+
 import { RequestError } from "../../domains/requestError";
 
 const execute = async ({ description }: NewCategoryParams): Promise<void> => {
-  const errorCallback = ({ hasError, message }: RequestError) => {
-    loadCategoryFail({ hasError, message });
-    throw new Error();
-  };
-
   loadCategory();
 
   return CategoryService.createCategory({
     description,
   })
-    .then(() => {
-      loadCreateCategoryDone();
+
+    .then((category) => {
+      loadCreateCategoryDone(category);
     })
-    .catch(errorCallback);
+
+    .catch(({ hasError, message }: RequestError) => {
+      loadCategoryFail({ hasError, message });
+
+      throw new Error();
+    });
 };
 
 const NewCategoryUseCase = {

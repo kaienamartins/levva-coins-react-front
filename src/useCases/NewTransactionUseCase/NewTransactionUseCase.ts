@@ -7,31 +7,39 @@ import {
 } from "../../stores/TransactionStore/TransactionEvents";
 
 import { NewTransactionParams } from "../../domains/transaction";
+
 import { RequestError } from "../../domains/requestError";
 
 const execute = async ({
   description,
+
   amount,
+
   type,
+
   categoryId,
 }: NewTransactionParams): Promise<void> => {
-  const errorCallback = ({ hasError, message }: RequestError) => {
-    loadTransactionFail({ hasError, message });
-    throw new Error();
-  };
-
   loadTransaction();
 
   return TransactionService.createTransaction({
     description,
+
     amount,
+
     type,
+
     categoryId,
   })
-    .then(() => {
-      loadCreateTransactionDone();
+
+    .then((transaction) => {
+      loadCreateTransactionDone(transaction);
     })
-    .catch(errorCallback);
+
+    .catch(({ hasError, message }: RequestError) => {
+      loadTransactionFail({ hasError, message });
+
+      throw new Error();
+    });
 };
 
 const NewTransactionUseCase = {

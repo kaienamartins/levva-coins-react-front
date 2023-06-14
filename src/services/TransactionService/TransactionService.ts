@@ -3,26 +3,36 @@ import { AxiosError } from "axios";
 import Api from "../../clients/api/Api";
 
 import { RequestError } from "../../domains/requestError";
+
 import { NewTransactionParams, TransactionValues } from "../../domains/transaction";
 
 const createTransaction = async ({
   description,
+
   amount,
+
   type,
+
   categoryId,
-}: NewTransactionParams): Promise<void> => {
+}: NewTransactionParams): Promise<TransactionValues> => {
   return Api.post({
     url: "/transaction",
+
     body: {
       description,
+
       amount,
+
       type,
+
       categoryId,
     },
   })
+
     .then((response) => {
       return response.data;
     })
+
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;
     });
@@ -32,9 +42,15 @@ const getTransactions = async (): Promise<TransactionValues[]> => {
   return Api.get({
     url: "/transaction",
   })
+
     .then((response) => {
-      return response.data;
+      const transactions = response.data;
+
+      transactions.sort((a: any, b: any) => b.id.localeCompare(a.id));
+
+      return transactions;
     })
+
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;
     });
@@ -42,5 +58,6 @@ const getTransactions = async (): Promise<TransactionValues[]> => {
 
 export const TransactionService = {
   createTransaction,
+
   getTransactions,
 };

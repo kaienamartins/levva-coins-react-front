@@ -39,7 +39,7 @@ export function Summary() {
       <SummaryCard>
         <header>
           <span>Entradas</span>
-          <ArrowCircleUp size={32} color={defaultTheme["yellow-500"]} />
+          <ArrowCircleUp size={32} color={defaultTheme["green-500"]} />
         </header>
 
         <strong>{money.format(summary.deposits)}</strong>

@@ -100,12 +100,9 @@ export function TransactionModal() {
             Categoria
           </option>
 
-          {Array.isArray(categories) &&
-            categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.description}
-              </option>
-            ))}
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>{category.description}</option>
+          ))}
         </FormSelect>
 
         {errors.categoryId && <FormError>{errors.categoryId.message}</FormError>}

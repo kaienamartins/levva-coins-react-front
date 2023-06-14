@@ -5,7 +5,7 @@ import Api from "../../clients/api/Api";
 import { CategoryValues, NewCategoryParams } from "../../domains/category";
 import { RequestError } from "../../domains/requestError";
 
-const createCategory = async ({ description }: NewCategoryParams): Promise<void> => {
+const createCategory = async ({ description }: NewCategoryParams): Promise<CategoryValues> => {
   return Api.post({
     url: "/category",
     body: {
@@ -25,7 +25,9 @@ const getCategories = async (): Promise<CategoryValues[]> => {
     url: "/category",
   })
     .then((response) => {
-      return response.data;
+      const categories = response.data;
+      categories.sort((a: any, b: any) => b.id.localeCompare(a.id));
+      return categories;
     })
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;

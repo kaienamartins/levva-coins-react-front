@@ -68,15 +68,12 @@ export function Home() {
             {(filteredResults.length > 0 ? filteredResults : transactions).map((transaction) => (
               <tr key={transaction.id}>
                 <td width="50%">{transaction.description}</td>
-
                 <td>
                   <PriceHighlight variant={transaction.type === 0 ? "income" : "outcome"}>
                     {money.format(transaction.amount)}
                   </PriceHighlight>
                 </td>
-
                 <td>{transaction.category.description}</td>
-
                 <td>{transaction.createdAt}</td>
               </tr>
             ))}

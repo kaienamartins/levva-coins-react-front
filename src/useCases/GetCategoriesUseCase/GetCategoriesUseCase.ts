@@ -10,17 +10,17 @@ import { RequestError } from "../../domains/requestError";
 import { CategoryValues } from "../../domains/category";
 
 const execute = async (): Promise<void> => {
-  const errorCallback = ({ hasError, message }: RequestError) => {
-    loadCategoryFail({ hasError, message });
-  };
-
   loadCategory();
 
   return CategoryService.getCategories()
+
     .then((categories: CategoryValues[]) => {
       loadCategoryDone(categories);
     })
-    .catch(errorCallback);
+
+    .catch(({ hasError, message }: RequestError) => {
+      loadCategoryFail({ hasError, message });
+    });
 };
 
 const GetCategoriesUseCase = {
