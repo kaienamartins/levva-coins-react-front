@@ -10,7 +10,7 @@ import { SearchForm } from "../../components/SearchForm";
 
 import { Summary } from "../../components/Summary";
 
-import {  useEffect } from "react";
+import { useEffect } from "react";
 
 import {
   HomeWrapper,
@@ -19,7 +19,7 @@ import {
   TransactionsTable,
   TransactionsTableEmpty,
 } from "./styles";
-
+import { format } from "date-fns";
 
 export function Home() {
   const { isLoading, transactions } = useStore(TransactionStore);
@@ -40,9 +40,15 @@ export function Home() {
     currency: "BRL",
   });
 
+  const formattedDate = (dateString: any) => {
+    const date = new Date(dateString);
+    return format(date, "dd/MM/yyyy");
+  };
+
   useEffect(() => {
     GetTransactionsUseCase.execute();
   }, []);
+
   return (
     <HomeWrapper>
       <Header />
@@ -63,7 +69,7 @@ export function Home() {
           </thead>
 
           <tbody>
-            {(transactions).map((transaction) => (
+            {transactions.map((transaction) => (
               <tr key={transaction.id}>
                 <td width="50%">{transaction.description}</td>
                 <td>
@@ -72,7 +78,8 @@ export function Home() {
                   </PriceHighlight>
                 </td>
                 <td>{transaction.category.description}</td>
-                <td>{transaction.createdAt}</td>
+                {/* <td>{transaction.createdAt}</td> */}
+                <td>{formattedDate(transaction.createdAt)}</td>
               </tr>
             ))}
           </tbody>
