@@ -64,7 +64,6 @@ export function TransactionModal() {
   }, []);
 
   async function handleCreateCategory({ description, amount, type, categoryId }: FormProps) {
-    console.log({ description, amount, type, categoryId });
     NewTransactionUseCase.execute({
       description,
       amount,

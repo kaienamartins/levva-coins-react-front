@@ -217,7 +217,7 @@
             {
               "target": "params",
               "modifier": "userId",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiI3MjViZjkyYS1mMjhkLTRjMjgtYWVmNS05NmM2M2RmMWRlNTIiLCJuYW1lIjoiRGFydGggVmFkZXIiLCJlbWFpbCI6ImRhcnRoLnZhZGVyQGxldnZhLmlvIiwiaWF0IjoxNTE2MjM5MDIyfQ.LgdcOXGTCtWjaufHD8-vHfkLPz888fKBq0AB5D0zVtI",
+              "value": "725bf92a-f28d-4c28-aef5-96c63df1de52",
               "invert": true,
               "operator": "equals"
             }

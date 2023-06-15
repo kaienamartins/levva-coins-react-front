@@ -9,18 +9,9 @@ export interface IRequest {
 }
 
 Axios.interceptors.request.use((config) => {
-  //const token = window.localStorage.getItem("token");
-
   const user = JSON.parse(window.localStorage.getItem("user") ?? "{}") 
 
   if (user.token) config.headers.Authorization = user.token;
-
-
-
- // const user = JSON.parse(window.localStorage.getItem("user") ?? "{}") as LoginValues;
-
-  //if (!user || !user.token) return false;
-
 
   return config;
 });
