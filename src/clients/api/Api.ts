@@ -9,7 +9,7 @@ export interface IRequest {
 }
 
 Axios.interceptors.request.use((config) => {
-  const user = JSON.parse(window.localStorage.getItem("user") ?? "{}") 
+  const user = JSON.parse(window.localStorage.getItem("user") ?? "{}");
 
   if (user.token) config.headers.Authorization = user.token;
 
@@ -17,7 +17,7 @@ Axios.interceptors.request.use((config) => {
 });
 
 const Api = {
-  get: ({ url }: IRequest): Promise<any> => Axios.get(`${getApiHost()}${url}`),
+  get: ({ url, config }: IRequest): Promise<any> => Axios.get(`${getApiHost()}${url}`, config),
 
   post: ({ url, body, config }: IRequest): Promise<any> =>
     Axios.post(`${getApiHost()}${url}`, body, config),

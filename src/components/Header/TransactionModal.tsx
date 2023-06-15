@@ -62,7 +62,6 @@ export function TransactionModal() {
   useEffect(() => {
     GetCategoriesUseCase.execute();
   }, []);
-
   async function handleCreateCategory({ description, amount, type, categoryId }: FormProps) {
     NewTransactionUseCase.execute({
       description,
@@ -100,7 +99,9 @@ export function TransactionModal() {
           </option>
 
           {categories.map((category) => (
-            <option key={category.id} value={category.id}>{category.description}</option>
+            <option key={category.id} value={category.id}>
+              {category.description}
+            </option>
           ))}
         </FormSelect>
 

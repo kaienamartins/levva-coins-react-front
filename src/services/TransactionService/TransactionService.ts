@@ -44,11 +44,11 @@ const getTransactions = async (): Promise<TransactionValues[]> => {
   })
 
     .then((response) => {
-      const transactions = response.data;
+      // const transactions = response.data;
 
-      transactions.sort((a: any, b: any) => b.id.localeCompare(a.id));
+      // transactions.sort((a: any, b: any) => b.id.localeCompare(a.id));
 
-      return transactions;
+      return response.data;
     })
 
     .catch((err: AxiosError<RequestError>) => {
@@ -56,8 +56,30 @@ const getTransactions = async (): Promise<TransactionValues[]> => {
     });
 };
 
+const seachTransactions = async (searchValue: string | null) => {
+  if (searchValue === null || searchValue?.length <= 0) return getTransactions();
+
+  return Api.get({
+    url: "/transaction/search",
+
+    config: {
+      params: {
+        query: searchValue,
+      },
+    },
+  })
+
+    .then((response) => response.data)
+
+    .catch((error: AxiosError<RequestError>) => {
+      throw error.response?.data;
+    });
+};
+
 export const TransactionService = {
   createTransaction,
 
   getTransactions,
+
+  seachTransactions
 };

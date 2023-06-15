@@ -10,7 +10,7 @@ import { SearchForm } from "../../components/SearchForm";
 
 import { Summary } from "../../components/Summary";
 
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 
 import {
   HomeWrapper,
@@ -20,20 +20,19 @@ import {
   TransactionsTableEmpty,
 } from "./styles";
 
-import { TransactionValues } from "../../domains/transaction";
 
 export function Home() {
   const { isLoading, transactions } = useStore(TransactionStore);
 
-  const [filteredResults, setFilteredResults] = useState<TransactionValues[]>([]);
+  // const [filteredResults, setFilteredResults] = useState<TransactionValues[]>([]);
 
-  const handleSearch = (query: string) => {
-    const lower = query.toLowerCase();
+  // const handleSearch = (query: string) => {
+  //   const lower = query.toLowerCase();
 
-    const filtered = transactions.filter((t) => t.description.toLowerCase().includes(lower));
+  //   const filtered = transactions.filter((t) => t.description.toLowerCase().includes(lower));
 
-    setFilteredResults(filtered);
-  };
+  //   setFilteredResults(filtered);
+  // };
 
   const money = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -44,14 +43,13 @@ export function Home() {
   useEffect(() => {
     GetTransactionsUseCase.execute();
   }, []);
-
   return (
     <HomeWrapper>
       <Header />
 
       <Summary />
 
-      <SearchForm onSearch={handleSearch} />
+      <SearchForm />
 
       <TransactionsContainer>
         <TransactionsTable>
@@ -65,7 +63,7 @@ export function Home() {
           </thead>
 
           <tbody>
-            {(filteredResults.length > 0 ? filteredResults : transactions).map((transaction) => (
+            {(transactions).map((transaction) => (
               <tr key={transaction.id}>
                 <td width="50%">{transaction.description}</td>
                 <td>

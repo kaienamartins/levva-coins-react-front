@@ -25,14 +25,17 @@ const getCategories = async (): Promise<CategoryValues[]> => {
     url: "/category",
   })
     .then((response) => {
-      const categories = response.data;
-      categories.sort((a: any, b: any) => b.id.localeCompare(a.id));
-      return categories;
+      //const categories = response.data;
+      //return categories.sort((a: any, b: any) => b.id.localeCompare(a.id));
+      //return categories;
+      return response.data;
     })
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;
     });
 };
+
+
 
 export const CategoryService = {
   createCategory,

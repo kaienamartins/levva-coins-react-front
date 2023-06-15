@@ -2,31 +2,52 @@ import { MagnifyingGlass } from "phosphor-react";
 
 import { SearchFormContainer } from "./styles";
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-export function SearchForm({ onSearch }: any) {
-  const [query, setQuery] = useState("");
+import { yupResolver } from "@hookform/resolvers/yup";
 
-  const handleSearch = () => {
-    onSearch(query);
-  };
+import * as yup from "yup";
+import { SearchTransactionsUseCase } from "../../useCases/SearchTransactionUseCase/SearchTransactionUseCase";
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+interface formData {
+  search: string;
+}
+const formSchema = yup.object({
+  search: yup.string(),
+});
 
-    handleSearch();
+export function SearchForm() {
+  //const [query, setQuery] = useState("");
+
+  const { register, handleSubmit } = useForm<formData>({
+    resolver: yupResolver(formSchema),
+  });
+
+  // const handleSearch = () => {
+  //   onSearch(query);
+  // };
+
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+
+  //   handleSearch();
+  // };
+
+  const handleSearch = ({ search }: formData) => {
+    SearchTransactionsUseCase.execute(search ? search.trim() : null);
   };
 
   return (
-    <SearchFormContainer onSubmit={handleSubmit}>
+    <SearchFormContainer onSubmit={handleSubmit(handleSearch)}>
       <input
+      {...register("search")}
         type="text"
         placeholder="Busque por transacões"
-        onChange={(e) => setQuery(e.target.value)}
-        value={query}
+        // onChange={(e) => setQuery(e.target.value)}
+        // value={query}
       />
 
-      <button onClick={handleSearch}>
+      <button type="submit">
         <MagnifyingGlass size={20} />
         Buscar
       </button>
