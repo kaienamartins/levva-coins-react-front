@@ -15,10 +15,10 @@ const execute = async ({ email, password }: LoginParams): Promise<void> => {
   loadLogin();
 
   return LoginService.authenticateUser({ email, password })
-    .then(({ id, name, email, token }: LoginValues) => {
-      window.localStorage.setItem("token", token);
+    .then((user: LoginValues) => {
+      window.localStorage.setItem("user", JSON.stringify(user));
 
-      loadLoginDone({ id, name, email, token });
+      loadLoginDone(user);
 
       router.navigate("/home");
     })

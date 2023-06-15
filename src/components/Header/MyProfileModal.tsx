@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 import { router } from "../../Router";
 import { LoginValues } from "../../domains/login";
 import UpdateProfileUseCase from "../../useCases/UpdateProfileUseCase/UpdateProfileUseCase";
-import { useStore } from "effector-react/effector-react.mjs";
+import { useStore } from "effector-react";
 import ProfileStore from "../../stores/ProfileStore/ProfileStore";
 
 interface FormProps {
@@ -80,15 +80,17 @@ export function MyProfileModal() {
           alt={user?.name}
           variant="large"
         />
+
         <FormInput {...register("name")} type="name" defaultValue={user?.name} />
 
         {errors.name && <FormError>{errors.name.message}</FormError>}
 
         <FormInput type="email" placeholder={user?.email} disabled />
+
         {hasError && <FormError>{errorMessage}</FormError>}
 
         <FormButton type="submit">{isLoading ? "Carregando..." : "Atualizar"}</FormButton>
-
+        
         <SignOutButton type="button" onClick={handleSignOut}>
           Sair
         </SignOutButton>
