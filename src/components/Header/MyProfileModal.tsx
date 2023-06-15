@@ -59,7 +59,7 @@ export function MyProfileModal() {
   }
 
   function handleSignOut() {
-    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user");
     router.navigate("/login");
   }
 

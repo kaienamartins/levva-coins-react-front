@@ -183,7 +183,7 @@
       "type": "http",
       "documentation": "Update a user",
       "method": "put",
-      "endpoint": "user/:id",
+      "endpoint": "user/:userId",
       "responses": [
         {
           "uuid": "35816884-36c1-43c2-8def-905946d3a4b8",
