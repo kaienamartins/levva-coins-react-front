@@ -44,11 +44,9 @@ const getTransactions = async (): Promise<TransactionValues[]> => {
   })
 
     .then((response) => {
-      // const transactions = response.data;
+      const transactions = response.data;
 
-      // transactions.sort((a: any, b: any) => b.id.localeCompare(a.id));
-
-      return response.data;
+      return transactions.sort((a: any, b: any) => b.id - a.id);
     })
 
     .catch((err: AxiosError<RequestError>) => {
@@ -81,5 +79,5 @@ export const TransactionService = {
 
   getTransactions,
 
-  seachTransactions
+  seachTransactions,
 };
